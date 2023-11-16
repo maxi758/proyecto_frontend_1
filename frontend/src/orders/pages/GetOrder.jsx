@@ -39,7 +39,8 @@ const Order = () => {
     );
     console.log('updated products', updatedProducts);
     const updateTotal = updatedProducts.reduce((acc, product) => {
-      return acc + product.quantity * product.product.price;
+        console.log('product', product);
+      return acc + product.qty * product.product.price;
     }, 0);
     const updatedOrder = {
       ...loadedProducts,
