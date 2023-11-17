@@ -17,6 +17,7 @@ const OrderItem = (props) => {
     onDelete: props.onDelete,
     onUpdate: props.onUpdate,
   });
+  const orderId = localStorage.getItem('orderId');
 
   const removeFromOrder = async (props) => {
     try {
@@ -59,6 +60,16 @@ const OrderItem = (props) => {
       console.log('Error: ', err);
     }
   };
+
+  if (orderId === null) {
+    return (
+      <div className="center">
+        <Card>
+          <h2>No se pudo encontrar la orden</h2>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <li className="order-item">

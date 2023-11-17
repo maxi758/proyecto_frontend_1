@@ -13,12 +13,37 @@ const ProductItem = (props) => {
     price: props.price,
     quantity: props.quantity,
   });
+  const orderId = localStorage.getItem('orderId');
+
+  const createOrder = async (item) => {
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:5000/api/orders/products`,
+        'POST',
+        JSON.stringify({
+          products: [{ product: item.id, qty: item.quantity || 1 }],
+        }),
+        {
+          'Content-Type': 'application/json',
+        }
+      );
+      console.log('Response from fetch', responseData);
+
+      localStorage.setItem('orderId', responseData.order._id);
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  };
 
   const addToCart = async (item) => {
     try {
       console.log('adding to cart');
+      if (!orderId) {
+        await createOrder(item);
+        return;
+      }
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/654878575911775457c8ba13/products`,
+        `http://localhost:5000/api/orders/${orderId}/products`,
         'PATCH',
         JSON.stringify({
           products: [{ product: item.id, qty: item.quantity || 1 }],

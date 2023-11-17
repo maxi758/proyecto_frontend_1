@@ -9,10 +9,16 @@ import { useNavigate } from 'react-router-dom';
 
 const ProductList = (props) => {
   const navigate = useNavigate();
+  const orderId = localStorage.getItem('orderId');
 
   const handleRedirect = () => {
-    navigate('/orders/654878575911775457c8ba13');
+    if (!orderId) {
+      navigate('/products');
+      return;
+    }
+    navigate(`/orders/${orderId}`);
   };
+  
   if (props.items.length === 0) {
     return (
       <div className="product-list center">
