@@ -17,7 +17,7 @@ const OrderList = (props) => {
     return (
       <div className="order-list center">
         <Card>
-          <h2>No products found</h2>
+          <h2>No hay productos en su carrito, desea agregar?</h2>
           <Button onClick={handleRedirect}>Volver</Button>
         </Card>
       </div>
@@ -39,7 +39,7 @@ const OrderList = (props) => {
             onUpdate={props.onUpdateOrder}
           />
         ))}
-        <li>Total a Pagar: ${props.items.totalToPay}</li>
+        <li><b>Total a Pagar: ${props.items.totalToPay}</b></li>
       </ul>
       <Button onClick={handleRedirect}>Volver</Button>
     </React.Fragment>
