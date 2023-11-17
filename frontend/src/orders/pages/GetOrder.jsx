@@ -53,11 +53,11 @@ const Order = () => {
 
   return (
     <React.Fragment>
-      {isLoading && (
+      {/* {isLoading && (
         <div className="center">
           <CircularProgress />
         </div>
-      )}
+      )} */}
       {!isLoading && loadedProducts && (
         <OrderList
           items={loadedProducts}

@@ -1,40 +1,48 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Card, Button } from "@mui/material";
-import OrderItem from "./OrderItem";
+import { Card, Button } from '@mui/material';
+import OrderItem from './OrderItem';
 
-
-import "./OrderList.css";
+import './OrderList.css';
 
 const OrderList = (props) => {
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate('/products');
+  };
 
   if (props.items.order.products.length === 0) {
     return (
       <div className="order-list center">
         <Card>
           <h2>No products found</h2>
-          <Button to='/'>Volver</Button>
+          <Button onClick={handleRedirect}>Volver</Button>
         </Card>
       </div>
     );
   }
 
   return (
-    <ul className="order-list">
-      {props.items.order.products.map((product) => (
-        <OrderItem
-          key={product.product._id}
-          id={product.product._id}
-          price={product.product.price}
-          name={product.product.name}
-          description={product.product.description}
-          quantity={product.qty}
-          onDelete={props.onRemoveFromOrder}
-          onUpdate={props.onUpdateOrder}
-        />
-      ))}
-      <li>{props.items.totalToPay}</li>
-    </ul>
+    <React.Fragment>
+      <ul className="order-list">
+        {props.items.order.products.map((product) => (
+          <OrderItem
+            key={product.product._id}
+            id={product.product._id}
+            price={product.product.price}
+            name={product.product.name}
+            description={product.product.description}
+            quantity={product.qty}
+            onDelete={props.onRemoveFromOrder}
+            onUpdate={props.onUpdateOrder}
+          />
+        ))}
+        <li>Total a Pagar: ${props.items.totalToPay}</li>
+      </ul>
+      <Button onClick={handleRedirect}>Volver</Button>
+    </React.Fragment>
   );
 };
 
