@@ -18,7 +18,7 @@ const ProductItem = (props) => {
   const createOrder = async (item) => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/products`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/products`,
         'POST',
         JSON.stringify({
           products: [{ product: item.id, qty: item.quantity || 1 }],
@@ -43,7 +43,7 @@ const ProductItem = (props) => {
         return;
       }
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/${orderId}/products`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${orderId}/products`,
         'PATCH',
         JSON.stringify({
           products: [{ product: item.id, qty: item.quantity || 1 }],
