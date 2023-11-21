@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Button, Card, CircularProgress } from '@mui/material';
+import TextField from '@mui/material/TextField';
 import { useHttpClient } from '../../hooks/http-hook';
 
 import './ProductItem.css';
@@ -43,7 +44,9 @@ const ProductItem = (props) => {
         return;
       }
       const responseData = await sendRequest(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${orderId}/products`,
+        `${
+          import.meta.env.VITE_REACT_APP_BACKEND_URL
+        }/orders/${orderId}/products`,
         'PATCH',
         JSON.stringify({
           products: [{ product: item.id, qty: item.quantity || 1 }],
@@ -71,18 +74,23 @@ const ProductItem = (props) => {
           <h3>${props.price}</h3>
           <p>{props.description}</p>
           <form action="">
-            <input
+            <TextField
               type="number"
+              size="small"
+              margin="normal"
               name="quantity"
               id="quantity"
-              min="1"
-              max="10"
+              InputProps={{
+                inputProps: { 
+                    max: 10, min: 1
+                }
+            }}
               defaultValue="1"
               onChange={(event) => {
                 const updatedQuantity = parseInt(event.target.value);
                 item.quantity = updatedQuantity;
               }}
-            ></input>
+            />
           </form>
           <Button
             size="small"
