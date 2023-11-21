@@ -12,9 +12,9 @@ const Products = () => {
         const fetchProducts = async () => {
             try {
                 console.log("fetching products");
-                //console.log(`${process.env.REACT_APP_BACKEND_URL}/products`);
+                console.log(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products`);
                 const responseData = await sendRequest(
-                    `http://localhost:5000/api/products`
+                    `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products`
                 );
                 console.log('Response from fetch',responseData.products);
                 setLoadedProducts(responseData.products);

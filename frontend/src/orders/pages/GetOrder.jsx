@@ -15,7 +15,7 @@ const Order = () => {
       console.log('fetching order');
       //console.log(`${process.env.REACT_APP_BACKEND_URL}/products`);
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/${orderId}`
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${orderId}`
       );
       console.log('Response from fetch', responseData.order.products);
       setLoadedProducts(responseData);

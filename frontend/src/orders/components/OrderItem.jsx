@@ -24,7 +24,7 @@ const OrderItem = (props) => {
       console.log('removing from cart', props);
 
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/654878575911775457c8ba13/products/${props.id}`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${orderId}/products/${props.id}`,
         'DELETE'
       );
       console.log('Response from fetch', responseData);
@@ -43,7 +43,7 @@ const OrderItem = (props) => {
         item.quantity -= 1;
       }
       const responseData = await sendRequest(
-        `http://localhost:5000/api/orders/654878575911775457c8ba13`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${orderId}`,
         'PATCH',
         JSON.stringify({
           products: [{ product: item.id, qty: item.quantity }],
